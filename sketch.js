@@ -2,27 +2,32 @@ let back;
 let mid;
 let fore;
 
-let bx = 0, bx2 = 544;
-let mx = 0, mx2 = 544;
-let fx = 0;
+let bx = 0;
+let bx2 = 544;
+
+let mx = 0;
+let mx2 = 544;
+
+let fx = 0; 
 let fx2 = 544;
+
+let btx = 0
+let btx2 = 544;
+
+let ftx = 0;
+let ftx2 = 544;
 
 
 function preload() {
     back = loadImage('layers/bg-1.png');
     mid = loadImage('layers/bg-2.png');
     fore = loadImage('layers/bg-3.png');
-    fore2 = loadImage('layers/bg-4.png');
 
-    bg4 = loadImage('layers/bg-4.png');
-    bg5 = loadImage('layers/bg-5.png');
-
-
-
+    backTrees = loadImage('layers/bg-4.png');
+    foreTrees = loadImage('layers/bg-5.png');
 }
 
 function setup() {
-
     createCanvas(544, 320);
   }
   
@@ -37,10 +42,19 @@ function setup() {
     image(fore, fx, 0, width + 2, height);
     image(fore, fx2, 0, width + 2, height);
 
+    image(backTrees, btx, 0, width + 2, height);
+    image(backTrees, btx2, 0, width + 2, height);
+
+    image(foreTrees, btx, 0, width + 2, height);
+    image(foreTrees, btx2, 0, width + 2, height);
+
     // * Uncomment below for Movement*
-    // bx--; bx2--;
-    // mx-=2; mx2-=2;
-    // fx-=3; fx2-=3;    
+
+    // bx-=0.5; bx2-=0.5;
+    // mx--; mx2--;
+    // fx-=2; fx2-=2;
+    // btx-=3; btx2-=3;
+    // ftx-=4; ftx2-=4;
 
 
     if(bx <= -544){bx = 544};
@@ -51,6 +65,12 @@ function setup() {
 
     if(fx <= -544){fx = 544};
     if(fx2 <= -544){fx2 = 544}
+
+    if(btx <= -544){btx = 544};
+    if(btx2 <= -544){btx2 = 544}
+
+    if(ftx <= -544){ftx = 544};
+    if(ftx2 <= -544){ftx2 = 544}
 
     
   }

@@ -17,6 +17,11 @@ let btx2 = 544;
 let ftx = 0;
 let ftx2 = 544;
 
+let character;
+let cImg;
+let eImg;
+
+let enemies = [];
 
 function preload() {
     back = loadImage('layers/bg-1.png');
@@ -25,13 +30,25 @@ function preload() {
 
     backTrees = loadImage('layers/bg-4.png');
     foreTrees = loadImage('layers/bg-5.png');
+
+    cImg = loadImage('character/1.png');
 }
 
 function setup() {
     createCanvas(544, 320);
+    character = new Character();
   }
+
+function keyPressed() {
+    if (key == 'w') {
+        character.jump();
+    }
+}
   
-  function draw() {
+function draw() {
+
+    // BACKGROUND LOGIC
+
     background(220);
     image(back, bx, 0, width, height);
     image(back, bx2, 0, width, height);
@@ -72,5 +89,16 @@ function setup() {
     if(ftx <= -544){ftx = 544};
     if(ftx2 <= -544){ftx2 = 544}
 
-    
+    // CHARACTER LOGIC
+
+    character.show();
+    character.move();
+
+    if (random(1) <0.01) {
+        enemies.push(new Enemy());
+    }
+    for (let e of enemies) {
+        e.move();
+        e.show();
+    }
   }

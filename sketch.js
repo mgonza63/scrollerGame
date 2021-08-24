@@ -21,6 +21,9 @@ let character;
 let cImg;
 let eImg;
 
+let cFrames = [];
+let numFrames = 8;
+let whichCFrame = 0;
 
 let enemies = [];
 
@@ -34,12 +37,20 @@ function preload() {
 
     cImg = loadImage('character/1.png');
 
+    for (let i = 1; i < numFrames; i++) {
+        let fileName = 'character/run/' + i + '.png';
+        let frame = loadImage(fileName);
+        cFrames.push(frame);
+    }
 
 }
 
 function setup() {
     createCanvas(544, 320);
     character = new Character();
+
+    cAnimationX = width/ 2;
+    cAnimationY = height / 2
   }
 
 function keyPressed() {
@@ -95,6 +106,7 @@ function draw() {
     // CHARACTER LOGIC
 
     character.show();
+
     character.move();
 
     if (random(1) <0.01) {

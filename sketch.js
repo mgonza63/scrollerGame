@@ -21,6 +21,7 @@ let character;
 let cImg;
 let eImg;
 
+
 let enemies = [];
 
 function preload() {
@@ -32,6 +33,8 @@ function preload() {
     foreTrees = loadImage('layers/bg-5.png');
 
     cImg = loadImage('character/1.png');
+
+
 }
 
 function setup() {
@@ -44,7 +47,7 @@ function keyPressed() {
         character.jump();
     }
 }
-  
+
 function draw() {
 
     // BACKGROUND LOGIC
@@ -100,5 +103,10 @@ function draw() {
     for (let e of enemies) {
         e.move();
         e.show();
+        if (character.hits(e)) {
+            console.log('Dead');
+            noLoop()
+        }
     }
+
   }

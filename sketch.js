@@ -22,8 +22,12 @@ let cImg;
 let eImg;
 
 let cFrames = [];
-let numFrames = 8;
+let numFrames = 9;
 let whichCFrame = 0;
+
+let jFrames = [];
+let numJFrames = 4;
+let whichJFrame = 0;
 
 let enemies = [];
 
@@ -42,6 +46,12 @@ function preload() {
         let frame = loadImage(fileName);
         cFrames.push(frame);
     }
+    // jump frames
+    for (let i = 1; i < numJFrames; i++) {
+        let fileName = 'character/jump/' + i + '.png';
+        let frame = loadImage(fileName);
+        jFrames.push(frame);
+    }
 
 }
 
@@ -57,9 +67,11 @@ function keyPressed() {
     if (key == 'w') {
         character.jump();
     }
+
 }
 
 function draw() {
+    console.log(character.jIndex)
 
     // BACKGROUND LOGIC
 
@@ -81,11 +93,11 @@ function draw() {
 
     // * Uncomment below for Movement*
 
-    // bx-=0.5; bx2-=0.5;
-    // mx--; mx2--;
-    // fx-=2; fx2-=2;
-    // btx-=3; btx2-=3;
-    // ftx-=4; ftx2-=4;
+    bx-=0.5; bx2-=0.5;
+    mx--; mx2--;
+    fx-=2; fx2-=2;
+    btx-=3; btx2-=3;
+    ftx-=4; ftx2-=4;
 
 
     if(bx <= -544){bx = 544};
@@ -106,9 +118,17 @@ function draw() {
     // CHARACTER LOGIC
 
     character.show();
-
     character.move();
 
+    //  character.jumpAnim()
+
+    if (character.y < 170) {
+        character.jumpAnim()
+    } else {
+        character.run()
+
+    }
+    
     if (random(1) <0.01) {
         enemies.push(new Enemy());
     }

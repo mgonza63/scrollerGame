@@ -1,15 +1,4 @@
-// let cFrames = [];
-// let numFrames = 8;
-// let cAnimationX, cAnimationY;
-// let whichCFrame = 1;
 
-// function preload() {
-//     for (let i = 1; i < numFrames; i++) {
-//         let fileName = 'character/run/' + i + '.png';
-//         let frame = loadImage(fileName);
-//         cFrames.push(frame);
-//     }
-// }
 class Character {
     constructor() {
         this.r =150;
@@ -23,7 +12,9 @@ class Character {
         this.hY = 60;
 
         this.index = 0;
+        this.jIndex = 0;
         this.speed = .2;
+        this.jSpeed = .1;
         this.length = cFrames.length;
     }
 
@@ -32,6 +23,22 @@ class Character {
             this.vy = -18;
         }
     }
+
+    jumpAnim() {
+        // slow down animation
+        
+        let jIndex = floor(this.jIndex) % jFrames.length;
+
+        // animate
+        image(jFrames[jIndex], this.x, this.y, this.r, this.r)
+         this.jIndex += this.jSpeed;
+         // restart animation at the end of the jump
+        if (this.jIndex >= '3.6') {
+            this.jIndex = 0;
+
+        }
+    }
+
     hits(enemy) {
         fill(255,50)
         rect(enemy.x + 40, enemy.y + 50, enemy.r - 80, enemy.r - 50)
@@ -44,16 +51,21 @@ class Character {
         this.y = constrain(this.y, 0, height - this.r);
     }
     show() {
-        // slow down animation
-        let index = floor(this.index) % this.length;
-        image(cFrames[index], this.x, this.y, this.r, this.r)
-        this.index += this.speed;
 
-        if (whichCFrame === cFrames.length) {
-            whichCFrame = 0;
-        } 
-        // image(cImg, this.x, this.y, this.r, this.r);
         fill(255, 50);
         rect(this.x + 60, this.y + 80 , this.hX, this.hY);
     }
+    run() {
+            // slow down animation
+            let index = floor(this.index) % this.length;
+
+            // animate
+            image(cFrames[index], this.x, this.y, this.r, this.r)
+            this.index += this.speed;
+    
+            // repeat frames
+            if (whichCFrame === cFrames.length) {
+                whichCFrame = 0;
+                } 
+            }
 }

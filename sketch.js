@@ -84,11 +84,35 @@ function keyPressed() {
         gameHasStarted = true;
 
     }
+    if (key == 'r') {
+        enemies = [];
+         bx = 0;
+         bx2 = 544;
+        
+         mx = 0;
+         mx2 = 544;
+        
+         fx = 0; 
+         fx2 = 544;
+        
+         btx = 0
+         btx2 = 544;
+        
+         ftx = 0;
+         ftx2 = 544;
+         character.y = 170;
+         character.jIndex = 0;
+        loop();
+
+    }
 
 }
-
+function reset() {
+    fill(0);
+    mainText = 'GAME OVER'
+}
 function draw() {
-    // console.log(character.jIndex)
+
 
     // BACKGROUND LOGIC
 
@@ -119,6 +143,7 @@ function draw() {
     textFont(font);
     text(mainText, 110, 170);
 
+
     if (gameHasStarted) {
         mainText = ''
         bx-=0.5; bx2-=0.5;
@@ -134,12 +159,16 @@ function draw() {
             e.move();
             e.show();
             if (character.hits(e)) {
+
+                textSize(36);
+                fill(255);
+                textFont(font);
+                text(mainText, 110, 170);
                 console.log('Dead');
                 noLoop()
             }
         }
     }
-
     if(bx <= -544){bx = 544};
     if(bx2 <= -544){bx2 = 544};
 

@@ -40,8 +40,9 @@ class Character {
     }
 
     hits(enemy) {
-        fill(255,50)
-        rect(enemy.x + 40, enemy.y + 50, enemy.r - 80, enemy.r - 50)
+        // enemy hitbox
+        // fill(255,50)
+        // rect(enemy.x + 40, enemy.y + 50, enemy.r - 80, enemy.r - 50)
 
       return collideRectRect(this.x + 60, this.y + 80, this.hX , this.hY, enemy.x + 40, enemy.y + 50, enemy.r - 80, enemy.r - 50)
     }
@@ -51,9 +52,9 @@ class Character {
         this.y = constrain(this.y, 0, height - this.r);
     }
     show() {
-
-        fill(255, 50);
-        rect(this.x + 60, this.y + 80 , this.hX, this.hY);
+        // Character hitbox
+        // fill(255, 50);
+        // rect(this.x + 60, this.y + 80 , this.hX, this.hY);
     }
     run() {
             // slow down animation

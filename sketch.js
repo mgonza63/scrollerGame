@@ -31,6 +31,10 @@ let whichJFrame = 0;
 
 let enemies = [];
 
+var gameHasStarted = false
+
+let mainText = "PRESS 'S' TO START"
+
 function preload() {
     back = loadImage('layers/bg-1.png');
     mid = loadImage('layers/bg-2.png');
@@ -52,26 +56,39 @@ function preload() {
         let frame = loadImage(fileName);
         jFrames.push(frame);
     }
+    font = loadFont('upheavtt.ttf');
 
 }
 
 function setup() {
-    createCanvas(544, 320);
-    character = new Character();
 
-    cAnimationX = width/ 2;
-    cAnimationY = height / 2
+
+    // if (mode == 0) {
+    //     createCanvas(544, 320);
+
+    // }
+        createCanvas(544, 320);
+        character = new Character();
+
+        cAnimationX = width/ 2;
+        cAnimationY = height / 2
+
+
   }
 
 function keyPressed() {
     if (key == 'w') {
         character.jump();
     }
+    if (key == 's') {
+        gameHasStarted = true;
+
+    }
 
 }
 
 function draw() {
-    console.log(character.jIndex)
+    // console.log(character.jIndex)
 
     // BACKGROUND LOGIC
 
@@ -91,14 +108,37 @@ function draw() {
     image(foreTrees, btx, 0, width + 2, height);
     image(foreTrees, btx2, 0, width + 2, height);
 
-    // * Uncomment below for Movement*
+    bx-=0; bx2-=0;
+    mx-=0.2; mx2-=0.2;
+    fx-=0.3; fx2-=0.3;
+    btx-=0.4; btx2-=0.4;
+    ftx-=0.5; ftx2-=0.5;
 
-    bx-=0.5; bx2-=0.5;
-    mx--; mx2--;
-    fx-=2; fx2-=2;
-    btx-=3; btx2-=3;
-    ftx-=4; ftx2-=4;
+    textSize(36);
+    fill(255);
+    textFont(font);
+    text(mainText, 110, 170);
 
+    if (gameHasStarted) {
+        mainText = ''
+        bx-=0.5; bx2-=0.5;
+        mx--; mx2--;
+        fx-=2; fx2-=2;
+        btx-=3; btx2-=3;
+        ftx-=4; ftx2-=4;
+
+        if (random(1) <0.01) {
+            enemies.push(new Enemy());
+        }
+        for (let e of enemies) {
+            e.move();
+            e.show();
+            if (character.hits(e)) {
+                console.log('Dead');
+                noLoop()
+            }
+        }
+    }
 
     if(bx <= -544){bx = 544};
     if(bx2 <= -544){bx2 = 544};
@@ -129,16 +169,6 @@ function draw() {
 
     }
     
-    if (random(1) <0.01) {
-        enemies.push(new Enemy());
-    }
-    for (let e of enemies) {
-        e.move();
-        e.show();
-        if (character.hits(e)) {
-            console.log('Dead');
-            noLoop()
-        }
-    }
+
 
   }
